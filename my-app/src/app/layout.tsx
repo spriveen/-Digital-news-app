@@ -8,7 +8,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'aos/dist/aos.css';
 
 import type { Metadata } from "next";
-import { EB_Garamond } from "next/font/google"; // Remove duplicate import
+import { EB_Garamond } from "next/font/google"; 
+
+import Header from '@/components/Header'; // Ensure the path is correct
+
 import './variables.css';
 import "./globals.css";
 
@@ -31,6 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${ebGaramond.variable}`}> {/* Use ebGaramond here */}
+        <Header /> {/* Ensure Header component path is correct */}
         {children}
       </body>
     </html>
