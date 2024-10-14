@@ -1,11 +1,21 @@
+// import Icons
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
+// import bootstrap
+import 'bootstrap/dist/css/bootstrap.css';
+
+// import aos css
+import 'aos/dist/aos.css';
+
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { EB_Garamond } from "next/font/google"; // Remove duplicate import
+import './variables.css';
 import "./globals.css";
 
-// Importing Inter font
-const inter = Inter({
+// Importing EB Garamond font
+const ebGaramond = EB_Garamond({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-eb-garamond", // Ensure this matches your CSS variable naming
 });
 
 export const metadata: Metadata = {
@@ -20,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable}`}>
+      <body className={`${ebGaramond.variable}`}> {/* Use ebGaramond here */}
         {children}
       </body>
     </html>
