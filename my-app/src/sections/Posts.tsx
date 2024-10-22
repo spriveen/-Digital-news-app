@@ -7,10 +7,34 @@ import PostItemOne from '../components/PostItemOne';
 import TrendingPost from '@/components/TrendingPost';
 import Preloader from '@/components/Preloader';
 
+export interface PostProps{
+  _id:string;
+  img: string;
+  category: string;
+  date:string;
+  title:string;
+  brief:string;
+  avatar:string;
+  author:string;
+
+}
+
+const initialPost = {
+  img: '',
+  category: '',
+  date: '',
+  title: '',
+  brief: '',
+  avatar: '',
+  author: ''
+};
+
+
+
 export default function Posts() {
   const router = useRouter();
   const [items, setItems] = useState<any | []>([]);
-  const [item, setItem] =useState({});
+  const [item, setItem] =useState({initialPost});
 
 
   const getItemsData = () => {
@@ -50,15 +74,8 @@ export default function Posts() {
           items.length > 0 ? items.filter(
             (item: {trending: boolean, top:boolean})=>!item.trending && !item.top)
             .slice(0,3)
-          .map((item: { _id:string;
-            img: string;
-            category: string;
-            date:string;
-            title:string;
-            brief:string;
-            avatar:string;
-            author:string;
-           }) => (
+          .map(
+            (item:PostProps ) => (
            <PostItemOne key={item._id} large={false} item={item}/>
           )): (<Preloader/>)
           }
@@ -68,15 +85,7 @@ export default function Posts() {
           items.length > 0 ? items.filter(
             (item: {trending: boolean, top:boolean})=>!item.trending && !item.top)
             .slice(3,6)
-          .map((item: { _id:string;
-            img: string;
-            category: string;
-            date:string;
-            title:string;
-            brief:string;
-            avatar:string;
-            author:string;
-           }) => (
+          .map((item: PostProps) => (
            <PostItemOne key={item._id} large={false} item={item}/>
           )):(<Preloader/>)
           }
@@ -89,17 +98,15 @@ export default function Posts() {
                     items && 
                     items.length> 0 ? items.filter(
                       (item: {trending: boolean})=>item.trending)
-                      .map((item: { _id:string;
-                        img: string;
-                        category: string;
-                        date:string;
-                        title:string;
-                        brief:string;
-                        avatar:string;
-                        author:string;
-                       },index:number)=>(
-                        <TrendingPost key={item._id} index={index} item={item}/>
-                      )) : (<Preloader/>)
+                      .map((item: PostProps,
+                        index:number)=>(
+                        <TrendingPost 
+                        key={item._id}
+                         index={index} 
+                         item={item}
+                         />
+                      ))
+                       : (<Preloader/>)
                     
                   }
                 </ul>
