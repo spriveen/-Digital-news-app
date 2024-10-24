@@ -10,7 +10,7 @@ export async function GET() {
       headers: {
         'Content-Type': 'application/json',
       },
-      status: 200,
+      status: 201,
     });
   } catch (error) {
     return new Response(JSON.stringify({ message: 'SERVER ERROR' }), {
@@ -19,7 +19,7 @@ export async function GET() {
   }
 }
 
-export async function POST(request) {
+export async function POST(request: Request) {
   try {
     const postItem = await request.json();
     const savedItem = await new PostItem({ ...postItem }).save();
@@ -29,6 +29,34 @@ export async function POST(request) {
         'Content-Type': 'application/json',
       },
       status: 201,
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ message: 'SERVER ERROR' }), {
+      status: 500,
+    });
+  }
+}
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: { id: string } }
+) {
+  try {
+    const postItem = await PostItem.findByIdAndDelete(params.id);
+    if (!postItem) {
+      return new Response(
+        JSON.stringify({ message: 'No Item Found for this ID' }),
+        {
+          status: 404,
+        }
+      );
+    }
+
+    return new Response(JSON.stringify(postItem), {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      status: 200,
     });
   } catch (error) {
     return new Response(JSON.stringify({ message: 'SERVER ERROR' }), {

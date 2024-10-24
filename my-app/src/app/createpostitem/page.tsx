@@ -3,15 +3,16 @@
 import { useState } from "react";
 import React from "react";
 
+export const initialState = {
+  title: '',
+  img: '',
+  category: '',
+  author: '',
+  brief: '',
+  validate: '',
+};
 export default function CreatePostItem() {
-  const initialState = {
-    title: '',
-    img: '',
-    category: '',
-    author: '',
-    brief: '',
-    validate: '',
-  };
+  
 
   const [text, setText] = useState(initialState);
 
@@ -42,7 +43,7 @@ export default function CreatePostItem() {
 
         const result = response.status
 
-        if (result===201){
+        if (result===200){
           setText({...text, validate:'success'});
           console .log ('Sucess',result);
         }

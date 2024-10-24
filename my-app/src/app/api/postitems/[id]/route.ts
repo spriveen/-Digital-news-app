@@ -34,7 +34,7 @@ export async function GET(request: Request, {params}: {params: {id: string}}) {
         headers:{
             "Content-Type":"application/json",
         },
-        status:200
+        status:200,
        });
         }catch (error) {
            return new Response (JSON.stringify({message:"SERVER ERROR"}),{
